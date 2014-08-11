@@ -4,6 +4,7 @@ require 'active_record'
 
 require 'employee'
 require 'division'
+require 'pry'
 
 ActiveRecord::Base.establish_connection(YAML::load(File.open('./db/config.yml'))["test"])
 

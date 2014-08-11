@@ -27,7 +27,7 @@ def menu
     when '3' then create_division
     when '4' then list_divisions
     when '5' then add_to_division
-    when '9' then puts "Good-bye!"
+    when '9' then exit
     else
       puts "Sorry, that wasn't a valid option."
     end
@@ -65,9 +65,11 @@ def add_to_division
   print "Choose the employee: "; user_input = gets.chomp
   selected_employee = Employee.find_or_create_by(name: user_input)
   list_divisions
-  print "Choose the division: "; user_input = gets.chomp
-  selected_division = Division.find_or_create_by(name: user_input)
-
+  print "Choose the division: "; user_input_b = gets.chomp
+  selected_division = Division.find_or_create_by(name: user_input_b)
+  selected_division.employees << selected_employee
+  puts "The employees in the #{selected_division.name} are:\n"
+  selected_division.employees.each { |em| puts em.name }
 end
 
 menu
