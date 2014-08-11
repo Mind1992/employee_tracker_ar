@@ -4,6 +4,5 @@ class CreateEmployees < ActiveRecord::Migration
       t.column :name, :string
       t.column :division_id, :integer
     end
-    #remove_column :division_id :integer
   end
 end
