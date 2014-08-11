@@ -67,7 +67,7 @@ def add_to_division
   list_divisions
   print "Choose the division: "; user_input = gets.chomp
   selected_division = Division.find_or_create_by(name: user_input)
-  puts selected_division.name
+
 end
 
 menu
