@@ -14,16 +14,20 @@ end
 def menu
   choice = nil
   until choice == 'e'
-    puts "Press '1' to add a employee, or '2' to list your employees."
-    puts "Press '*' to exit."
+    puts "1:  add an employee"
+    puts "2:  list employees"
+    puts "3:  create a division"
+    puts "4:  list divisions"
+    puts "5:  add employee to a division "
+    puts "9:  exit"
     choice = gets.chomp
     case choice
-    when '1'
-      add
-    when '2'
-      list
-    when '*'
-      puts "Good-bye!"
+    when '1' then add
+    when '2' then list_employees
+    when '3' then create_division
+    when '4' then list_divisions
+    when '5' then add_to_division
+    when '9' then puts "Good-bye!"
     else
       puts "Sorry, that wasn't a valid option."
     end
@@ -37,10 +41,33 @@ def add
   puts "'#{employee_name}' has been added."
 end
 
-def list
+def list_employees
   puts "Here is the list of employees:"
   employees = Employee.all
   employees.each { |employee| puts employee.name }
+end
+
+def create_division
+  print "Name the division: "; division_name = gets.chomp
+  new_division = Division.new({:name => division_name})
+  new_division.save
+  puts "'#{division_name}' has been added."
+end
+
+def list_divisions
+  puts "Here is the list of divisions:"
+  divisions = Division.all
+  divisions.each { |division| puts division.name }
+end
+
+def add_to_division
+  list_employees
+  print "Choose the employee: "; user_input = gets.chomp
+  selected_employee = Employee.find_or_create_by(name: user_input)
+  list_divisions
+  print "Choose the division: "; user_input = gets.chomp
+  selected_division = Division.find_or_create_by(name: user_input)
+  puts selected_division.name
 end
 
 menu
