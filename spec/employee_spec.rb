@@ -16,4 +16,5 @@ describe Employee do
     employee.projects << project2
     expect(employee.projects).to eq [project, project2]
   end
+
 end
